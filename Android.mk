@@ -57,7 +57,7 @@ CFLAGS += -DSIGMA_DUT_VER=\"$(SIGMA_VER)\"
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := sigma_dut
-ifeq ($(PRODUCT_VENDOR_MOVE_ENABLED), true)
+ifneq ($(BOARD_VNDK_VERSION),)
 LOCAL_VENDOR_MODULE := true
 endif
 LOCAL_CLANG := true
@@ -88,7 +88,7 @@ endif
 CFLAGS += -Wno-unused-parameter
 LOCAL_C_INCLUDES += system/security/keystore/include/keystore
 LOCAL_SHARED_LIBRARIES += liblog
-ifeq ($(PRODUCT_VENDOR_MOVE_ENABLED), true)
+ifneq ($(BOARD_VNDK_VERSION),)
 LOCAL_SHARED_LIBRARIES += libkeystore-engine-wifi-hidl libkeystore-wifi-hidl
 else
 LOCAL_SHARED_LIBRARIES += libkeystore_binder
